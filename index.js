@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({
 const santriRouter = require('./routes/santri')
 
 // routes example
-app.use('/create-santri', santriRouter);
+app.use('/santri', santriRouter);
 
 // Connect to DB
 var uri = process.env.MONGODB_URI;

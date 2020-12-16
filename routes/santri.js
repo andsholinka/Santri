@@ -19,4 +19,16 @@ router.post('/', async (req, res) => {
     }
 });
 
+// READ
+router.get('/', async (req, res) => {
+    try {
+        const santri = await Santri.find()
+        res.json(santri);
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
+
 module.exports = router
