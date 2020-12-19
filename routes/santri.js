@@ -31,4 +31,21 @@ router.get('/', async (req, res) => {
     }
 });
 
+// UPDATE
+router.put('/:santriId', async (req, res) => {
+    try {
+        const santriUpdate = await Santri.updateOne({
+            _id: req.params.santriId
+        }, {
+            nama: req.body.nama,
+            alamat: req.body.alamat
+        })
+        res.json(santriUpdate);
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
+
 module.exports = router
