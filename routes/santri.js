@@ -48,4 +48,18 @@ router.put('/:santriId', async (req, res) => {
     }
 });
 
+// DELETE
+router.delete('/:santriId', async (req, res) => {
+    try {
+        const santriDelete = await Santri.deleteOne({
+            _id: req.params.santriId
+        })
+        res.json(santriDelete);
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
+
 module.exports = router
