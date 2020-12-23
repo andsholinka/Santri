@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 //import validation
 const {
     registerValidation
-} = require('../configs/validation')
+} = require('../config/validation')
 
 // import models
 const User = require('../models/user')
