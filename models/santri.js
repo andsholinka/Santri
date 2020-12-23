@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const SantriSchema = mongoose.Schema({
     nama: {
         type: String,
-        required: [true, "nama tidak boleh kosong"],
+        required: true,
     },
     alamat: {
         type: String,
-        required: [true, "alamat tidak boleh kosong"],
+        required: true,
     },
     tglTerdaftar: {
         type: Date,
