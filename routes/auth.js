@@ -9,7 +9,7 @@ const {
 } = require('../configs/validation')
 
 // import models
-const User = require('../models/User')
+const User = require('../models/user')
 
 // Register
 router.post('/register', async (req, res) => {
@@ -51,6 +51,34 @@ router.post('/register', async (req, res) => {
             message: 'Gagal Membuat user baru'
         })
     }
+})
+
+// Login 
+router.post('/login', async (req, res) => {
+
+    // if email exist
+    const user = await User.findOne({
+        email: req.body.email
+    })
+    if (!user) return res.status(400).json({
+        status: res.statusCode,
+        message: 'Email Anda Salah!'
+    })
+
+    // check password
+    const validPwd = await bcrypt.compare(req.body.password, user.password)
+    if (!validPwd) return res.status(400).json({
+        status: res.statusCode,
+        message: 'Password Anda Salah!'
+    })
+
+    // membuat token menggunkan JWT
+    const token = jwt.sign({
+        _id: user._id
+    }, process.env.SECRET_KEY)
+    res.header('auth-token', token).json({
+        token: token
+    })
 })
 
 module.exports = router
