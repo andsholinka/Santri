@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Santri = require('../models/santri')
 
+const verifyToken = require('../routes/verifyToken')
+
 // CREATE
-router.post('/', async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
     const santriPost = new Santri({
         nama: req.body.nama,
         alamat: req.body.alamat
@@ -20,7 +22,7 @@ router.post('/', async (req, res) => {
 });
 
 // READ
-router.get('/', async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
     try {
         const santri = await Santri.find()
         res.json(santri);
@@ -32,7 +34,7 @@ router.get('/', async (req, res) => {
 });
 
 // UPDATE
-router.put('/:santriId', async (req, res) => {
+router.put('/:santriId', verifyToken, async (req, res) => {
     try {
         const santriUpdate = await Santri.updateOne({
             _id: req.params.santriId
@@ -49,7 +51,7 @@ router.put('/:santriId', async (req, res) => {
 });
 
 // DELETE
-router.delete('/:santriId', async (req, res) => {
+router.delete('/:santriId', verifyToken, async (req, res) => {
     try {
         const santriDelete = await Santri.deleteOne({
             _id: req.params.santriId
