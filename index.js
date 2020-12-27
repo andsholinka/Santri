@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({
 
 // import routes
 const santriRouter = require('./routes/santri')
-const userRouter = require('./routes/auth')
+const userRouter = require('./routes/user')
 
 // routes example
 app.use('/api/santri', santriRouter);
